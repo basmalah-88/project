@@ -16,7 +16,8 @@ from sklearn.linear_model import LinearRegression
 
 # Load data
 try:
-    df = pd.read_csv('C:/Users/user/Downloads/updated_file.csv')
+    df = pd.read_csv('updated_file.csv')
+')
 except FileNotFoundError:
     st.error("Error: 'updated_file.csv' not found. Please ensure the file path is correct.")
     st.stop() # Stop execution if file not found
