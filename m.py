@@ -17,22 +17,21 @@ from sklearn.linear_model import LinearRegression
 # Load data
 
 
+# واجهة رفع الملف
 uploaded_file = st.file_uploader("📁 ارفعي ملف CSV الخاص بالنماذج", type=["csv"])
 
+# التحقق من رفع الملف
 if uploaded_file is not None:
     df = pd.read_csv(uploaded_file)
     st.success("✅ تم تحميل الملف بنجاح")
+
+    # واجهة التطبيق
+    st.title('NABLS-AI')
+    st.info('NABLS-AI: Trend Analysis in Artificial Intelligence Research')
+
+    # عرض البيانات الأصلية
+    st.subheader("Raw Data Preview")
     st.dataframe(df)
-else:
-    st.warning("🚨 يرجى رفع ملف بصيغة CSV للاستمرار.")
-
-# Set up Streamlit UI
-st.title('NABLS-AI')
-st.info('NABLS-AI: Trend Analysis in Artificial Intelligence Research')
-
-# Display raw data
-st.subheader("Raw Data Preview")
-st.dataframe(df)
 
 # User-editable code block
 cody = '''
