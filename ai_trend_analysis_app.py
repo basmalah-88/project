@@ -56,29 +56,28 @@ if uploaded_file is not None:
 
 st.subheader("🔍 التحليل العنقودي باستخدام K-Means")
 numeric_features = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
-if numeric_features:
-    X_cluster = df[numeric_features]
+st.write(f"Numeric features found: {numeric_features}")
+X_cluster = df[numeric_features]
 
-    # تعويض القيم الناقصة بالمتوسط بدلاً من حذف الصفوف
-    imputer = SimpleImputer(strategy='mean')
-    X_imputed = imputer.fit_transform(X_cluster)
+imputer = SimpleImputer(strategy='mean')
+X_imputed = imputer.fit_transform(X_cluster)
+st.write(f"Data shape after imputation: {X_imputed.shape}")
 
-    if X_imputed.shape[0] > 0:
-        scaler = StandardScaler()
-        X_scaled = scaler.fit_transform(X_imputed)
-        kmeans = KMeans(n_clusters=3, random_state=0)
-        clusters = kmeans.fit_predict(X_scaled)
-        pca = PCA(n_components=2)
-        X_pca = pca.fit_transform(X_scaled)
+if X_imputed.shape[0] > 0 and X_imputed.shape[1] > 0:
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X_imputed)
+    kmeans = KMeans(n_clusters=3, random_state=0)
+    clusters = kmeans.fit_predict(X_scaled)
+    pca = PCA(n_components=2)
+    X_pca = pca.fit_transform(X_scaled)
 
-        fig2, ax2 = plt.subplots()
-        scatter = ax2.scatter(X_pca[:, 0], X_pca[:, 1], c=clusters, cmap='viridis')
-        ax2.set_title("نتائج التجميع")
-        st.pyplot(fig2)
-    else:
-        st.warning("⚠️ لا توجد بيانات كافية لتحليل التجميع.")
+    fig2, ax2 = plt.subplots()
+    scatter = ax2.scatter(X_pca[:, 0], X_pca[:, 1], c=clusters, cmap='viridis')
+    ax2.set_title("نتائج التجميع")
+    st.pyplot(fig2)
 else:
-    st.warning("⚠️ لا توجد أعمدة رقمية في الملف لتحليل التجميع.")
+    st.warning("⚠️ لا توجد بيانات رقمية كافية لتحليل التجميع.")
+
 
 
     st.subheader("🧠 نموذج تصنيف باستخدام Random Forest")
