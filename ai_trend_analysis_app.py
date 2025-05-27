@@ -58,16 +58,21 @@ if uploaded_file is not None:
     numeric_features = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
     if numeric_features:
         X_cluster = df[numeric_features].dropna()
-        scaler = StandardScaler()
-        X_scaled = scaler.fit_transform(X_cluster)
-        kmeans = KMeans(n_clusters=3, random_state=0)
-        clusters = kmeans.fit_predict(X_scaled)
-        pca = PCA(n_components=2)
-        X_pca = pca.fit_transform(X_scaled)
-        fig2, ax2 = plt.subplots()
-        scatter = ax2.scatter(X_pca[:, 0], X_pca[:, 1], c=clusters, cmap='viridis')
-        ax2.set_title("نتائج التجميع")
-        st.pyplot(fig2)
+
+if not X_cluster.empty:
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X_cluster)
+    kmeans = KMeans(n_clusters=3, random_state=0)
+    clusters = kmeans.fit_predict(X_scaled)
+    pca = PCA(n_components=2)
+    X_pca = pca.fit_transform(X_scaled)
+    fig2, ax2 = plt.subplots()
+    scatter = ax2.scatter(X_pca[:, 0], X_pca[:, 1], c=clusters, cmap='viridis')
+    ax2.set_title("نتائج التجميع")
+    st.pyplot(fig2)
+else:
+    st.warning("⚠️ لا توجد بيانات عددية كافية بدون قيم مفقودة لتحليل التجميع.")
+
 
     st.subheader("🧠 نموذج تصنيف باستخدام Random Forest")
     df_model = df.dropna()
