@@ -32,12 +32,12 @@ file_path = 'ai_models.csv' # If it is in the same folder as the application
 try:
     df = pd.read_csv(file_path)
     st.success(f"The file was downloaded from: `{file_path}`")
-    st.subheader("Preview raw data")
-    st.dataframe(df.head())
+    #st.subheader("Preview raw data")
+    #st.dataframe(df.head())
 except FileNotFoundError:
     st.error(f"Error: File ‘{file_path}’ does not exist. Please check the correct path and the existence of the file in your project folder on GitHub.")
     st.stop() # Suspend execution if file not found
-
+"""
 #--Editable code editor ---
 st.header("Code modification and data analysis ✍️")
 st.markdown("""
@@ -47,6 +47,7 @@ st.markdown("""
     * **Use `st.write()` for text, `st.dataframe()` for tables, and `st.pyplot()` for graphs.**
 * **All attempts to save files to fixed local paths (`df.to_csv`) have been removed from this code because they will not work in a web environment.**
 """)
+"""
 
 # Default code for the user to edit
 cody = '''
@@ -501,6 +502,7 @@ else:
 '''
 
 # Use code_editor for a better editing experience (optional)
+"""
 try:
     from code_editor import code_editor
     response_dict = code_editor(cody, lang="python", height=800,
@@ -509,6 +511,7 @@ try:
 except ImportError:
     st.warning("`streamlit-code-editor` is not installed. Please install it (pip install streamlit-code-editor) for a better editor experience, or `st.text_area` will be used.")
     user_code_from_editor = st.text_area("✍️ Edit the code here:", cody, height=800)
+    """
 
 
 # --- Run button ---
