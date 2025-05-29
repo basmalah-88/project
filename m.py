@@ -16,9 +16,13 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score
 from sklearn.linear_model import LinearRegression
 
 # Load data
-import os
-filepath = os.path.join(os.path.dirname(__file__), 'updated_file.csv')
-df = pd.read_csv(filepath)
+uploaded_file = st.file_uploader("Upload your updated_file.csv", type=["csv"])
+if uploaded_file is not None:
+    df = pd.read_csv(uploaded_file)
+else:
+    st.warning("Please upload a CSV file to proceed.")
+    st.stop()
+
 """
 try:
     df = pd.read_csv('C:/Users/user/Downloads/updated_file.csv')
