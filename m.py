@@ -16,7 +16,7 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score
 from sklearn.linear_model import LinearRegression
 
 # Load data
-uploaded_file = st.file_uploader("Upload your ai_models.csv", type=["csv"])
+ai_models = st.file_uploader("Upload your ai_models.csv", type=["csv"])
 if uploaded_file is not None:
     df = pd.read_csv(ai_models)
 else:
