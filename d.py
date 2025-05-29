@@ -351,7 +351,7 @@ else:
 
 
 # Field Trend Analysis (by Noora)
-st.subheader("Field Trend Analysis"))
+st.subheader("Field Trend Analysis")
 if 'Domain' in df.columns and not df.empty:
     df_clean = df.dropna(subset=['Domain'])
     df_exploded = df_clean.assign(Domain=df_clean['Domain'].str.split(',')).explode('Domain')
