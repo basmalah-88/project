@@ -19,6 +19,10 @@ import numpy as np
 from sklearn.cluster import KMeans
 
 import sqlite3
+# Set up Streamlit UI
+st.set_page_config(layout="wide", page_title="NABLS-AI Dashboard")
+st.title('NABLS-AI: Trends in Artificial Intelligence Research')
+st.info('NABLS-AI:A tool for analyzing data and exploring trends in artificial intelligence research.')
 
 # إعداد الصفحة
 st.set_page_config(page_title="تحليل التجميع بالذكاء الاصطناعي", layout="wide")
@@ -99,10 +103,7 @@ if uploaded_file is not None:
 else:
     st.info("👈 الرجاء رفع ملف CSV أولاً لبدء التحليل.")
 
-# Set up Streamlit UI
-st.set_page_config(layout="wide", page_title="NABLS-AI Dashboard")
-st.title('NABLS-AI: Trends in Artificial Intelligence Research')
-st.info('NABLS-AI:A tool for analyzing data and exploring trends in artificial intelligence research.')
+
 
 # --- Download data from a fixed path (within the repository) ---
 st.header("Source data 📊")
