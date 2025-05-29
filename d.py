@@ -512,7 +512,7 @@ except ImportError:
 
 
 # --- Run button ---
-if st.button(“Run analysis”):
+if st.button("Run analysis"):
     if not user_code_from_editor.strip():
         final_user_code = cody
     else:
