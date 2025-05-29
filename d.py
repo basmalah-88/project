@@ -492,16 +492,7 @@ else:
 '''
 
 # Use code_editor for a better editing experience (optional)
-"""
-try:
-    from code_editor import code_editor
-    response_dict = code_editor(cody, lang="python", height=800,
-                                editor_props={"theme": "dracula"})
-    user_code_from_editor = response_dict['text'] if response_dict and 'text' in response_dict else cody
-except ImportError:
-    st.warning("`streamlit-code-editor` is not installed. Please install it (pip install streamlit-code-editor) for a better editor experience, or `st.text_area` will be used.")
-    user_code_from_editor = st.text_area("✍️ Edit the code here:", cody, height=800)
-    """
+
 
 
 # --- Run button ---
