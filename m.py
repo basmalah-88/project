@@ -16,12 +16,16 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score
 from sklearn.linear_model import LinearRegression
 
 # Load data
+import os
+filepath = os.path.join(os.path.dirname(__file__), 'updated_file.csv')
+df = pd.read_csv(filepath)
+"""
 try:
     df = pd.read_csv('C:/Users/user/Downloads/updated_file.csv')
 except FileNotFoundError:
     st.error("Error: 'updated_file.csv' not found. Please ensure the file path is correct.")
     st.stop() # Stop execution if file not found
-
+"""
 # Set up Streamlit UI
 st.title('NABLS-AI')
 st.info('NABLS-AI: Trend Analysis in Artificial Intelligence Research')
