@@ -380,7 +380,7 @@ if not domain_trends.empty:
         ax_top_domains.set_title("Top 5 Popular Domains (2021–2025)")
         ax_top_domains.set_xlabel("Year")
         ax_top_domains.set_ylabel("Number of AI Models")
-        ax_top_domains.legend(title="Number of Models"))
+        ax_top_domains.legend(title="Number of Models")
         plt.tight_layout()
         st.pyplot(fig_top_domains)
         plt.close(fig_top_domains)
