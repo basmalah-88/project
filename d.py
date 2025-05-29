@@ -297,7 +297,6 @@ if 'AI_Trend' in df.columns and 'Abstract' in df.columns and 'Model' in df.colum
         .fillna('')
         .agg(' '.join, axis=1)
         .apply(classify_ai_trend_reclassify)
-    )
 
     df['AI_Trend'] = df.apply(
         lambda row: row['AI_Trend_Reclassified'] if row['AI_Trend'] == "Other" and row['AI_Trend_Reclassified'] != "Other"
