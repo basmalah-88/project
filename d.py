@@ -37,17 +37,7 @@ try:
 except FileNotFoundError:
     st.error(f"Error: File ‘{file_path}’ does not exist. Please check the correct path and the existence of the file in your project folder on GitHub.")
     st.stop() # Suspend execution if file not found
-"""
-#--Editable code editor ---
-st.header("Code modification and data analysis ✍️")
-st.markdown("""
-    You can modify the code below to perform your own analyses.
-    **Important notes:**
-    * **Do not reload `df` from other CSV files within the code unless absolutely necessary.** The variable `df` already contains the loaded data.
-    * **Use `st.write()` for text, `st.dataframe()` for tables, and `st.pyplot()` for graphs.**
-* **All attempts to save files to fixed local paths (`df.to_csv`) have been removed from this code because they will not work in a web environment.**
-""")
-"""
+
 
 # Default code for the user to edit
 cody = '''
