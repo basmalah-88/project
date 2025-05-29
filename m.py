@@ -16,20 +16,14 @@ from sklearn.metrics import accuracy_score, precision_score, recall_score
 from sklearn.linear_model import LinearRegression
 
 # Load data
-uploaded_file = st.file_uploader("Upload your updated_file.csv", type=["csv"])
+uploaded_file = st.file_uploader("Upload your ai_models.csv", type=["csv"])
 if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
+    df = pd.read_csv(ai_models)
 else:
     st.warning("Please upload a CSV file to proceed.")
     st.stop()
 
-"""
-try:
-    df = pd.read_csv('C:/Users/user/Downloads/updated_file.csv')
-except FileNotFoundError:
-    st.error("Error: 'updated_file.csv' not found. Please ensure the file path is correct.")
-    st.stop() # Stop execution if file not found
-"""
+
 # Set up Streamlit UI
 st.title('NABLS-AI')
 st.info('NABLS-AI: Trend Analysis in Artificial Intelligence Research')
