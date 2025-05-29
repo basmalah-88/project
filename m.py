@@ -17,7 +17,7 @@ from sklearn.linear_model import LinearRegression
 
 # Load data
 ai_models = st.file_uploader("Upload your ai_models.csv", type=["csv"])
-if uploaded_file is not None:
+if ai_models is not None:
     df = pd.read_csv(ai_models)
 else:
     st.warning("Please upload a CSV file to proceed.")
