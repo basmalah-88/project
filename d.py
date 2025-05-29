@@ -492,15 +492,12 @@ else:
 '''
 
 # Use code_editor for a better editing experience (optional)
-
-
-
 # --- Run button ---
 if st.button("Run analysis"):
-    if not user_code_from_editor.strip():
-        final_user_code = cody
+    if not cody.strip():
+        final_user_code = ""
     else:
-        final_user_code = user_code_from_editor
+        final_user_code = cody
 
     if 'df' in locals() and df is not None: 
         try:
@@ -526,10 +523,11 @@ if st.button("Run analysis"):
 
             st.success("The code was successfully executed!")
             st.write("---")
-            st.write("The analysis is complete. You can modify the code above and restart.")
+            st.write("The analysis is complete. You can modify the code in the script and rerun.")
 
         except Exception as e:
             st.error(f"An error occurred while executing the code: {e}")
             st.exception(e) # To display the complete error trace
     else:
        st.warning("Please make sure to download the data file first.")
+
