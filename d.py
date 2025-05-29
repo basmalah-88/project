@@ -16,6 +16,89 @@ from sklearn.linear_model import LinearRegression
 from sklearn.neighbors import KNeighborsClassifier
 import numpy as np
 
+from sklearn.cluster import KMeans
+
+import sqlite3
+
+# إعداد الصفحة
+st.set_page_config(page_title="تحليل التجميع بالذكاء الاصطناعي", layout="wide")
+st.title("📊 تحليل التجميع (Clustering) باستخدام KMeans")
+
+# تحميل ملف CSV
+uploaded_file = st.file_uploader("📎 ارفع ملف CSV يحتوي على بياناتك", type=["csv"])
+
+# اختيار عدد العناقيد
+k = st.number_input("🔢 اختر عدد العناقيد (k)", min_value=1, max_value=10, value=4)
+
+# تنفيذ عند رفع الملف
+if uploaded_file is not None:
+    # قراءة البيانات
+    df = pd.read_csv(uploaded_file)
+    st.subheader("📄 البيانات الأصلية")
+    st.dataframe(df)
+
+    # اختيار الأعمدة الرقمية فقط
+    numeric_cols = df.select_dtypes(include=['float64', 'int64']).columns
+    df_numeric = df[numeric_cols].copy()
+
+    # تعويض القيم المفقودة بالوسيط
+    df_numeric.fillna(df_numeric.median(numeric_only=True), inplace=True)
+
+    # تقييس البيانات
+    scaler = StandardScaler()
+    scaled_data = scaler.fit_transform(df_numeric)
+
+    # تنفيذ KMeans
+    kmeans = KMeans(n_clusters=k, random_state=42, n_init=10)
+    df_numeric['Cluster'] = kmeans.fit_predict(scaled_data)
+
+    # تقليل الأبعاد باستخدام PCA للرسم
+    pca = PCA(n_components=2)
+    reduced_data = pca.fit_transform(scaled_data)
+    df_numeric['PCA1'] = reduced_data[:, 0]
+    df_numeric['PCA2'] = reduced_data[:, 1]
+
+    # دمج النتائج مع البيانات الأصلية
+    df_output = df.copy()
+    df_output['Cluster'] = df_numeric['Cluster'].values
+
+    # عرض النتائج
+    st.subheader("📊 النتائج بعد التجميع")
+    st.dataframe(df_output)
+
+    # رسم التجميع
+    st.subheader("📈 رسم العناقيد باستخدام PCA")
+    fig, ax = plt.subplots(figsize=(8, 6))
+    sns.scatterplot(data=df_numeric, x='PCA1', y='PCA2', hue='Cluster', palette='Set2', s=100, ax=ax)
+    ax.set_title(f"K-Means Clustering (k={k})")
+    ax.set_xlabel("Principal Component 1")
+    ax.set_ylabel("Principal Component 2")
+    ax.grid(True)
+    st.pyplot(fig)
+
+    # حفظ النتائج في CSV
+    csv_filename = "clustered_ai_models.csv"
+    df_output.to_csv(csv_filename, index=False)
+    st.success(f"✅ تم حفظ الملف باسم: {csv_filename}")
+
+    # زر تحميل الملف
+    with open(csv_filename, "rb") as file:
+        st.download_button(
+            label="📥 تحميل الملف CSV",
+            data=file,
+            file_name=csv_filename,
+            mime="text/csv"
+        )
+
+    # حفظ النتائج في SQLite
+    conn = sqlite3.connect("clusters.db")
+    df_output.to_sql("cluster_results", conn, if_exists="replace", index=False)
+    conn.close()
+    st.success("✅ تم حفظ النتائج في قاعدة بيانات SQLite (clusters.db)")
+
+else:
+    st.info("👈 الرجاء رفع ملف CSV أولاً لبدء التحليل.")
+
 # Set up Streamlit UI
 st.set_page_config(layout="wide", page_title="NABLS-AI Dashboard")
 st.title('NABLS-AI: Trends in Artificial Intelligence Research')
@@ -60,7 +143,7 @@ if 'Confidence' in df.columns:
         if current_column_non_null_count < equ:
             columns_to_drop.append(column_name)
 
-    st.write(f"The unique values of Confidence: {df['Confidence'].unique()}")
+    #st.write(f"The unique values of Confidence: {df['Confidence'].unique()}")
     if columns_to_drop:
         df.drop(columns=columns_to_drop, axis=1, inplace=True)
         st.write(f"The columns have been knocked down: {columns_to_drop}")
