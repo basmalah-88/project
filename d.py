@@ -362,14 +362,14 @@ if 'Domain' in df.columns and not df.empty:
         st.write("Field directions (tail):")
         st.dataframe(domain_trends.tail())
     else:
-        st.warning("The ‘Year’ column is missing in the DataFrame field. Field trends cannot be calculated by year.")
+        st.warning("The 'Year' column is missing in the DataFrame field. Field trends cannot be calculated by year.")
         domain_trends = pd.DataFrame()
 else:
-    st.warning("The ‘Domain’ column is missing or the DataFrame is empty. Domain trend analysis cannot be performed.")
+    st.warning("The 'Domain' column is missing or the DataFrame is empty. Domain trend analysis cannot be performed.")
     domain_trends = pd.DataFrame()
 
 
-st.warning("The ‘Domain’ column is missing or the DataFrame is empty. Domain trends cannot be analyzed.") # Visualize domain trends (by Noora)
+st.warning("The 'Domain' column is missing or the DataFrame is empty. Domain trends cannot be analyzed.") # Visualize domain trends (by Noora)
 st.subheader("Domain trend graphs")
 if not domain_trends.empty:
     sns.set(style="whitegrid")
@@ -412,7 +412,7 @@ if 'AI_Trend' in df.columns and not df.empty and 'trend_by_year' in locals() and
             sns.lineplot(data=data, x='Year', y='Model_Count', marker='o', ax=ax_single_trend)
             ax_single_trend.set_title(f'Evolution of {trend} over the years')
             ax_single_trend.set_ylabel(trend)
-            ax_single_trend.tick_params(axis=‘x’, rotation=45)
+            ax_single_trend.tick_params(axis='x', rotation=45)
             plt.tight_layout()
             st.pyplot(fig_single_trend)
             plt.close(fig_single_trend)
@@ -425,7 +425,7 @@ else:
 # Regression model for predicting AI trends in 2026 (by Noora)
 st.subheader("Regression model for predicting AI trends in 2026")
 
-if ‘top_5_trends’ in locals() and top_5_trends and ‘trend_by_year’ in locals() and not trend_by_year.empty:
+if 'top_5_trends' in locals() and top_5_trends and 'trend_by_year' in locals() and not trend_by_year.empty:
     st.write(f"Top 5 AI trends identified for prediction: {top_5_trends}")
 
     filtered_trends_2021_2025 = trend_by_year[
