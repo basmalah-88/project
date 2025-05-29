@@ -26,7 +26,7 @@ st.header("بيانات المصدر 📊")
 
 # === هام: الرجاء تغيير هذا المسار إلى المسار الفعلي لملفك ===
 # استخدم المسار بنظام الشرطة المائلة الأمامية / أو أضف 'r' قبل المسار
-file_path = 'C:/Users/BAB AL SAFA/Desktop/nablsai/ai_models.csv'
+file_path = 'C:/Users/user/Documents/ai_models.csv'
 # مثال على مسار نسبي إذا كان الملف في نفس مجلد تطبيق Streamlit:
 # file_path = 'ai_models.csv'
 
@@ -56,7 +56,7 @@ cody = '''
 # تنظيف البيانات ومعالجتها - (بواسطة Noora)
 # df هو DataFrame الذي تم تحميله بالفعل في بداية التطبيق.
 # لا تقم بإعادة تحميل البيانات هنا إلا إذا كنت تحتاج إلى ملف آخر.
-# df = pd.read_csv(r'C:/Users/BAB AL SAFA/Desktop/nablsai/ai_models.csv')
+# df = pd.read_csv(r'C:/Users/user/Documents/ai_models.csv')
 
 if 'Confidence' in df.columns:
     df = df.dropna(subset=["Confidence"])
@@ -86,12 +86,12 @@ else:
     st.warning("عمود 'Confidence' غير موجود. تم تخطي معالجة هذا العمود.")
 
 # حفظ التغييرات إلى ملف جديد (اختياري، وقد لا يكون فعالاً في بيئات النشر السحابية)
-df.to_csv(r'C:/Users/BAB AL SAFA/Desktop/nablsai/updated_file3.csv', index=False)
+df.to_csv(r'C:/Users/user/Documents/updated_file3.csv', index=False)
 
 # تحليل K-Nearest Neighbors (KNN) - (بواسطة Noora)
 # df هو DataFrame الذي تم تحميله ومعالجته بالفعل.
 # لا تقم بإعادة تحميل البيانات هنا.
-# df = pd.read_csv(r'C:/Users/BAB AL SAFA/Desktop/nablsai/updated_file3.csv')
+# df = pd.read_csv(r'C:/Users/user/Documents/updated_file3.csv')
 
 if 'Confidence' in df.columns:
     X = df.drop("Confidence", axis=1)
@@ -150,7 +150,7 @@ else:
 # تنظيف البيانات وإعدادها (بواسطة Sedrah)
 # df هو DataFrame الذي تم تحميله ومعالجته بالفعل.
 # لا تقم بإعادة تحميل البيانات هنا.
-# df = pd.read_csv(r'C:/Users/BAB AL SAFA/Desktop/nablsai/ai_models.csv')
+# df = pd.read_csv(r'C:/Users/user/Documents/ai_models.csv')
 
 def classify_trend(model_name):
     if pd.isna(model_name): return 'Other'
@@ -268,7 +268,7 @@ else:
     df['Year'] = 0
 
 # حفظ التغييرات إلى ملف جديد (اختياري)
-df.to_csv(r'C:/Users/BAB AL SAFA/Desktop/nablsai/updated_file.csv', index=False)
+df.to_csv(r'C:\Users\user\Documents/updated_file.csv', index=False)
 
 trend_keywords = {
     'AI Generation': ['generate', 'generative', 'GAN', 'diffusion', 'image-to-image', 'synthesis'],
