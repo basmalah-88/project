@@ -20,10 +20,10 @@ from sklearn.cluster import KMeans
 
 import sqlite3
 # Set up Streamlit UI
-st.set_page_config(layout="wide", page_title="NABLS-AI Dashboard")
+st.set_page_config(page_title="تحليل التجميع بالذكاء الاصطناعي", layout="wide")
 st.title('NABLS-AI: Trends in Artificial Intelligence Research')
 st.info('NABLS-AI:A tool for analyzing data and exploring trends in artificial intelligence research.')
-st.set_page_config(page_title="تحليل التجميع بالذكاء الاصطناعي", layout="wide")
+
 
 # إعداد الصفحة
 
